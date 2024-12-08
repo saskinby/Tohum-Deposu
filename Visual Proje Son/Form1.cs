@@ -18,35 +18,35 @@ namespace Visual_Proje_Son
 {
     public partial class Form1 : Form
     {
-        // Database yolunu sabit olarak tanımlıyoruz
-        private readonly string dbPath = @"Data Source=C:\Users\mfaru\source\repos\Visual Proje Son\Visual Proje Son\girisdb.db;Version=3;";
+        
+        private readonly string dbPath = @"Data Source=\Visual Proje Son\girisdb.db;Version=3;";     //KONUMU AYARLAMANIZ GEREKİR
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e) // Giriş Yap
+        private void button1_Click(object sender, EventArgs e) // Giriş Yapma Butonu
         {
-            // Eğer email veya şifre boşsa, hata mesajı göster
+            
             if (string.IsNullOrWhiteSpace(textemail.Text) || string.IsNullOrWhiteSpace(textsifre.Text))
             {
                 MessageBox.Show("Lütfen email ve şifre giriniz.", "Hata");
                 return;
             }
 
-            // Veritabanı bağlantısı
-            string dbPath = "Data Source=C:\\Users\\mfaru\\source\\repos\\Visual Proje Son\\girisdb.db;Version=3;";
+            
+            string dbPath = "Data Source=\\Visual Proje Son\\girisdb.db;Version=3;";   //KONUMU AYARLAMANIZ GEREKİR
             using (SQLiteConnection conn = new SQLiteConnection(dbPath))
             {
                 try
                 {
-                    conn.Open(); // Bağlantıyı aç
+                    conn.Open(); 
                     string query = "SELECT * FROM girisdb WHERE email = @Email AND sifre = @Sifre";
 
                     using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     {
-                        // Parametreleri ekle
+                        
                         cmd.Parameters.AddWithValue("@Email", textemail.Text);
                         cmd.Parameters.AddWithValue("@Sifre", textsifre.Text);
 
@@ -54,16 +54,16 @@ namespace Visual_Proje_Son
                         DataTable dt = new DataTable();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 0) // Kullanıcı bulunduysa
+                        if (dt.Rows.Count > 0) 
                         {
-                            MessageBox.Show("Giriş başarılı!", "Başarılı");
-                            Form2 form2 = new Form2(); // Form2'ye geç
+                            label4.Text = "Giriş Başarılı";
+                            Form2 form2 = new Form2(); 
                             form2.Show();
                             this.Hide();
                         }
                         else
                         {
-                            MessageBox.Show("Email veya şifre hatalı.", "Hata");
+                            label4.Text  ="Email veya şifre hatalı.";
                         }
                     }
                 }
@@ -73,46 +73,62 @@ namespace Visual_Proje_Son
                 }
                 finally
                 {
-                    conn.Close(); // Bağlantıyı kapat
-                    textemail.Clear(); // TextBox'ları temizle
+                    conn.Close(); 
+                    textemail.Clear(); 
                     textsifre.Clear();
                 }
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) // Kaydol
+        private void button2_Click(object sender, EventArgs e) // Kaydolma Butonu
         {
-            // Eğer email veya şifre boşsa, hata mesajı göster
+            
             if (string.IsNullOrWhiteSpace(textemail.Text) || string.IsNullOrWhiteSpace(textsifre.Text))
             {
-                MessageBox.Show("Lütfen email ve şifre giriniz.", "Hata");
+                label4.Text = "Lütfen email ve şifre giriniz.";
                 return;
             }
 
-            // Veritabanı bağlantısı
-            string dbPath = "Data Source=C:\\Users\\mfaru\\source\\repos\\Visual Proje Son\\girisdb.db;Version=3;";
+           
+            string dbPath = "Data Source=\\Visual Proje Son\\girisdb.db;Version=3;";  //KONUMU AYARLAMANIZ GEREKİR
             using (SQLiteConnection conn = new SQLiteConnection(dbPath))
             {
                 try
                 {
-                    conn.Open(); // Bağlantıyı aç
-                    string query = "INSERT INTO girisdb (email, sifre) VALUES (@Email, @Sifre)";
+                    conn.Open(); 
 
+                    
+                    string checkQuery = "SELECT COUNT(*) FROM girisdb WHERE email = @Email";
+                    using (SQLiteCommand checkCmd = new SQLiteCommand(checkQuery, conn))
+                    {
+                        checkCmd.Parameters.AddWithValue("@Email", textemail.Text);
+
+                        int emailCount = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                        if (emailCount > 0)
+                        {
+                            label4.Text = "Bu email zaten kullanımda.";
+                            return;
+                        }
+                    }
+
+                    
+                    string query = "INSERT INTO girisdb (email, sifre) VALUES (@Email, @Sifre)";
                     using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     {
-                        // Parametreleri ekle
+                        
                         cmd.Parameters.AddWithValue("@Email", textemail.Text);
                         cmd.Parameters.AddWithValue("@Sifre", textsifre.Text);
 
-                        int rowsAffected = cmd.ExecuteNonQuery(); // Veriyi ekle ve eklenip eklenmediğini kontrol et
+                        int rowsAffected = cmd.ExecuteNonQuery(); 
 
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Kayıt başarılı!", "Başarılı");
+                            label4.Text="Kayıt başarılı!";
                         }
                         else
                         {
-                            MessageBox.Show("Kayıt başarısız oldu. Lütfen tekrar deneyin.", "Hata");
+                            label4.Text = "Kayıt başarısız oldu. Lütfen tekrar deneyin.";
                         }
                     }
                 }
@@ -122,16 +138,13 @@ namespace Visual_Proje_Son
                 }
                 finally
                 {
-                    conn.Close(); // Bağlantıyı kapat
-                    textemail.Clear(); // TextBox'ları temizle
+                    conn.Close();
+                    textemail.Clear(); 
                     textsifre.Clear();
                 }
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
