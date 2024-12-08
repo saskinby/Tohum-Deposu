@@ -3,9 +3,9 @@ Bu proje Visual Programming dersi için yapılan bir projedir. C#.net Windows Fo
 
  Uygulamayı çalıştırmadan önce databaselerin konumlarını kendi bilgisayarınıza göre değiştirmeniz gerekir.
 
- Gerekli NuGetlar:
+ Kullanılan NuGetlar:
 - SQLite
 - System.Data.SQLite
 
- Gerekli uzantılar:
+ Kullanılan Uzantılar:
 - SQLite and SQL Server Compact Toolbox
