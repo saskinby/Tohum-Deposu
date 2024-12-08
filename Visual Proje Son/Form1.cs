@@ -19,7 +19,7 @@ namespace Visual_Proje_Son
     public partial class Form1 : Form
     {
         
-        private readonly string dbPath = @"Data Source=\Visual Proje Son\girisdb.db;Version=3;";     //KONUMU AYARLAMANIZ GEREKİR
+        private readonly string dbPath = @"Data Source=\girisdb.db;Version=3;";     //KONUMU AYARLAMANIZ GEREKİR
 
         public Form1()
         {
@@ -36,7 +36,7 @@ namespace Visual_Proje_Son
             }
 
             
-            string dbPath = "Data Source=\\Visual Proje Son\\girisdb.db;Version=3;";   //KONUMU AYARLAMANIZ GEREKİR
+            string dbPath = "Data Source=\\girisdb.db;Version=3;";   //KONUMU AYARLAMANIZ GEREKİR
             using (SQLiteConnection conn = new SQLiteConnection(dbPath))
             {
                 try
@@ -90,7 +90,7 @@ namespace Visual_Proje_Son
             }
 
            
-            string dbPath = "Data Source=\\Visual Proje Son\\girisdb.db;Version=3;";  //KONUMU AYARLAMANIZ GEREKİR
+            string dbPath = "Data Source=\\girisdb.db;Version=3;";  //KONUMU AYARLAMANIZ GEREKİR
             using (SQLiteConnection conn = new SQLiteConnection(dbPath))
             {
                 try
