@@ -2,6 +2,7 @@ Bu proje Visual Programming dersi için yapılan bir projedir. C#.net Windows Fo
   Bir tohum deposunun deposundaki malzemelerini gösteren, değiştirmemize olanak sağlayan, grafikte gösteren bir uygulamadır. Herhangi bir depo için uyarlanabilir.
 
  Uygulamayı çalıştırmadan önce databaselerin konumlarını kendi bilgisayarınıza göre değiştirmeniz gerekir.
+
  Gerekli NuGetlar:
 - SQLite
 - System.Data.SQLite
