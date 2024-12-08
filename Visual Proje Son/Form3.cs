@@ -9,7 +9,7 @@ namespace Visual_Proje_Son
     public partial class Form3 : Form
     {
         
-        private string connectionString = "Data Source=\\Visual Proje Son\\grafik.db;Version=3;";  //KONUMU AYARLAMANIZ GEREKİR
+        private string connectionString = "Data Source=\\grafik.db;Version=3;";  //KONUMU AYARLAMANIZ GEREKİR
 
         public Form3()
         {
